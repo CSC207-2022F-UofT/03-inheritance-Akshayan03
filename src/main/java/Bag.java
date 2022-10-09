@@ -5,6 +5,10 @@
  * 1. Introduction to Java helpful.
  */
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public abstract class Bag {
     /*
      * TODO: Create the following private instance variables
@@ -13,6 +17,10 @@ public abstract class Bag {
      *       - an int named capacity
      *       - an array of Strings named contents
      */
+    private String color;
+    private int numberOfContents;
+    private int capacity;
+    private String[] contents;
 
 
 
@@ -26,6 +34,12 @@ public abstract class Bag {
      * be empty (e.g. numberOfContents is 0 and an empty String array for
      * its contents.)
      */
+    public Bag(String color, int capacity){
+        this.color = color;
+        this.capacity = capacity;
+        this.contents = new String[capacity];
+        this.numberOfContents = 0;
+    }
 
 
 
@@ -38,18 +52,25 @@ public abstract class Bag {
      *           - getCapacity
      */
 
+    public String getColor() {
+        return color;
+    }
 
+    public int getNumberOfContents() {
+        return numberOfContents;
+    }
 
-
+    public int getCapacity() {
+        return capacity;
+    }
     /*
      * TODO: Create a setter function called setColor which sets the
      *       color of this bag to the given color.
      */
 
-
-
-
-
+    public void setColor(String color) {
+        this.color = color;
+    }
     /*
      * TODO: Create a method called addItem that takes in a String
      *       representing an item in the Bag.
@@ -60,7 +81,16 @@ public abstract class Bag {
      *       This method should return true if the item was added
      *       and false otherwise.
      */
-
+    public boolean addItem(String s) {
+        if (numberOfContents < capacity) {
+            contents[numberOfContents] = s;
+            numberOfContents += 1;
+            return true;
+        } else {
+            return false;
+        }
+    }
+        
 
 
 
@@ -75,10 +105,15 @@ public abstract class Bag {
      *
      * @return
      */
-
-
-
-
+    public String popItem() {
+        if (contents == null){
+            return null;
+        } else {
+            String x = contents[numberOfContents - 1];
+            numberOfContents --;
+            return x;
+        }
+    }
 
     /**
      * Increase this bag's capacity by n.
@@ -87,7 +122,7 @@ public abstract class Bag {
      */
     public void increaseCapacity(int n) {
         // TODO: Implement this method.
-
+        capacity += n;
     }
 
     /**
